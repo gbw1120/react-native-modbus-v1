@@ -12,12 +12,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Marcello168/react-native-modbus"
+    "url": "git+https://github.com/gbw1120/react-native-modbus-v1"
   },
   "bugs": {
-    "url": "https://github.com/Marcello168/react-native-modbus/issues"
+    "url": "https://github.com/gbw1120/react-native-modbus-v1/issues"
   },
-  "homepage": "https://github.com/Marcello168/react-native-modbus#readme",
+  "homepage": "https://github.com/gbw1120/react-native-modbus-v1#readme",
   "author": "",
   "license": "",
   "peerDependencies": {
