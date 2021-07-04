@@ -2,6 +2,10 @@ import { NativeModules } from 'react-native';
 
 const { RNModbus } = NativeModules;
 
+function getAllDevicesPath() {
+    RNModbus.getAllDevicesPath();
+}
+
 /**
  * 
  * @param {*串口编程口} path 
@@ -46,6 +50,6 @@ function writeSingleRegister(slaveId, start, value) {
 function readHoldingRegisters(slaveId, start, len) {
     RNModbus.readHoldingRegisters(slaveId, start, len);
 }
-export { openDevice, writeRegisters, readHoldingRegisters };
+export { openDevice, writeRegisters, readHoldingRegisters, getAllDevicesPath };
 
 export default RNModbus;
