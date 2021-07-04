@@ -2,6 +2,7 @@
 package com.dlcmodbus;
 
 import android.util.Log;
+import android.serialport.SerialPortFinder;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -38,6 +39,28 @@ public class RNModbusModule extends ReactContextBaseJavaModule {
   public String getName() {
     return "RNModbus";
   }
+
+//获取端口列表
+@ReactMethod
+public void getAllDevicesPath(Promise promise){
+  try {
+    SerialPortFinder serialPortFinder = new SerialPortFinder();
+  String[] paths = serialPortFinder.getAllDevicesPath();
+  WritableArray pathArray = Arguments.createArray();
+  for (int i = 0; i <paths.length ; i++) {
+    String path = paths[i];
+    pathArray.pushString(path);
+  }
+  // WritableMap map = Arguments.createMap();
+  // map.putArray("data",pathArray);
+  promise.resolve(pathArray);
+  } catch (Exception e) {
+    //TODO: handle exception
+    promise.reject("E_LAYOUT_ERROR", e);
+  }
+
+}
+
 
   /**
    * 打开ModBlus
@@ -103,8 +126,10 @@ public class RNModbusModule extends ReactContextBaseJavaModule {
                         Log.d(TAG, "onSuccess: 读到数据:"+ ByteUtil.bytes2HexStr(data));
                         WritableArray receiveArray = Arguments.createArray();
                         for (int i = 0; i < data.length; i++) {
-                          int cmdSingle = data[i] & 0xFF;
-                          receiveArray.pushInt(cmdSingle);
+                          // int cmdSingle = data[i] & 0xFF;
+                          // receiveArray.pushInt(cmdSingle);
+                          String cmdSingle = Integer.toHexString(data[i] & 0xFF);
+                          receiveArray.pushString(cmdSingle);
                         }
 //                          promise.resolve(receiveArray);
                           WritableMap map = Arguments.createMap();
